@@ -1,3 +1,18 @@
+<?php
+
+session_start();
+
+// Sertakan file koneksi
+require 'koneksi.php';
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    // Jika belum login, arahkan ke halaman login
+    header("Location: login.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +55,7 @@
     }
 
     main {
-      flex: 1;
+      flex: 1; /* Allows main to take available space */
       padding: 20px 16px;
     }
 
@@ -122,8 +137,8 @@
   </main>
 
   <nav>
-    <a href="Pidashboard.php" >🏠</a>
-    <a href="Pihome.php "class="active">🕒</a>
+    <a href="Pidashboard.php">🏠</a>
+    <a href="Pihome.php" class="active">🕒</a> <!-- Fixed missing space in class attribute -->
     <a href="Piinstruksi.php">📋</a>
     <a href="Piprofile.php">👤</a>
   </nav>
