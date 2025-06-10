@@ -141,7 +141,7 @@ if (isset($_POST['login'])) {
             <button type="submit" name="login" class="login-btn">LOG IN</button>
             <div class="links">
                 <a href="forgot_password.php">Forgot Password?</a>
-                <a href="index.php">Register</a>
+                <a href="rregister.php">Register</a>
             </div>
         </form>
     </div>

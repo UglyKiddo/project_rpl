@@ -1,6 +1,17 @@
-include 'partials/header.php';
+
+<?php
+include "project_rpl/awal/connection.php";
+include "partials/header.php";
 include "partials/footer.php";
 
+session_start();
+
+// Pastikan user memiliki role admin
+if (!isset($_SESSION['role']) || $_SESSION['role'] != "peneliti") {
+    header("location:login.php");
+    exit();
+}
+?>
 
 <div class="main">
   <a href="index.php?page=peternakan" class="category-btn">

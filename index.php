@@ -21,7 +21,7 @@
     .logo {
       width: 100px;
       height: 150px;
-      background: url('assets/logo.png') no-repeat center;
+      background: url('logo.png') no-repeat center;
       background-size: contain;
       margin-bottom: 20px;
     }
@@ -52,14 +52,14 @@
   </style>
 </head>
 <body>
-  <div class="logo" style="background-image: url('assets/logo.png');"></div>
+  <div class="logo" style="background-image: url('logo.png');"></div>
   <div class="text">Hi, Welcome To <span class="highlight">BacterFly</span></div>
   <div class="loading"></div>
 
   <!-- Opsional: Arahkan ke halaman utama setelah beberapa detik -->
   <script>
     setTimeout(() => {
-      window.location.href = "home.php"; // ganti dengan halaman utama Anda
+      window.location.href = "login.php"; // ganti dengan halaman utama Anda
     }, 3000);
   </script>
 </body>
