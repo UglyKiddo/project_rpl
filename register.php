@@ -102,7 +102,7 @@ if (isset($_POST['signup'])) {
         // Redirect ke halaman sesuai divisi
         switch ($division) {
             case 'Laboratorium':
-                header("Location: lab.php");
+                header("Location: PiDashboard.php");
                 break;
             case 'Produksi':
                 header("Location: produksi.php");

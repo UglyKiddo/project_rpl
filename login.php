@@ -26,12 +26,15 @@ if (isset($_POST['login'])) {
         // Login berhasil
         $_SESSION['user_email'] = $email;
         $_SESSION['logged_in'] = true;
+        $_SESSION['id'] = $user['id']; // Add user ID to session
         $_SESSION['division'] = $user['division']; // Ambil divisi dari database
 
         $pesan = "Login berhasil! Selamat datang.";
         // Redirect ke halaman sesuai divisi
         switch ($user['division']) {
             case 'Laboratorium':
+                header("Location: Pidashboard.php");
+                break;
             case 'Produksi':
                 header("Location: pilih_bidang.php");
                 break;
