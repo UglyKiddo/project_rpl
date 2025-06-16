@@ -194,19 +194,19 @@ try {
     </div>
 
     <div class="bottom-nav">
-        <a href="manajer.php">
+        <a href="lab_dashboard.php">
             <img src="images/home.png" alt="Home">
             <span>Home</span>
         </a>
-        <a href="pengawasan.php" class="active">
+        <a href="lab_bakteri.php" class="active">
             <img src="images/timer.png" alt="Pengawasan">
             <span>Pengawasan</span>
         </a>
-        <a href="#">
+        <a href="lab_intruksi.php">
             <img src="images/list.png" alt="List">
             <span>List</span>
         </a>
-        <a href="profil_manajer.php">
+        <a href="lab_profil.php">
             <img src="images/profile.png" alt="Profile">
             <span>Profile</span>
         </a>
