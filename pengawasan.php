@@ -33,25 +33,27 @@ $nama = $user ? $user['nama'] : 'Manajer';
             height: 100vh;
             justify-content: space-between;
         }
-        .top-bar {
-            padding: 10px;
-            background-color: #000;
-            border-bottom: 1px solid #333;
+        header {
+            text-align: center;
+            padding: 1rem;
+            background: #000;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            gap: 10px;
+        }
+        .logo-img {
+            height: 30px;
+            vertical-align: middle;
         }
         .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #FF8C42;
-            font-size: 14px;
-            font-family: 'Courier New', monospace;
+            color: #FFA500;
+            font-size: 24px;
+            margin: 0;
         }
-        .logo img {
-            height: 30px;
-            margin-right: 10px;
+        .welcome-text {
+            font-size: 14px;
+            color: #FF8C42;
         }
         .division-buttons {
             display: flex;
@@ -79,16 +81,17 @@ $nama = $user ? $user['nama'] : 'Manajer';
             height: 24px;
         }
         .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            background: #000;
-            padding: 10px 0;
             position: fixed;
             bottom: 0;
             width: 100%;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-            border-top: 1px solid #555;
+            background: linear-gradient(90deg, #222, #444); /* Gradien untuk latar belakang */
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5); /* Bayangan halus */
+            border-top: 1px solid #555; /* Garis pemisah */
         }
+
         .bottom-nav a {
             color: #fff;
             text-decoration: none;
@@ -96,25 +99,30 @@ $nama = $user ? $user['nama'] : 'Manajer';
             flex-direction: column;
             align-items: center;
             font-size: 12px;
-            transition: transform 0.2s, opacity 0.2s;
+            transition: transform 0.2s, opacity 0.2s; /* Transisi halus */
         }
+
         .bottom-nav img {
             width: 24px;
             height: 24px;
             margin-bottom: 2px;
             opacity: 0.7;
         }
+
         .bottom-nav a:hover img,
         .bottom-nav a.active img {
             opacity: 1;
-            transform: scale(1.2);
+            transform: scale(1.2); /* Efek pembesaran saat hover atau aktif */
         }
+
         .bottom-nav a.active {
             color: #FF8C42;
         }
+
         .bottom-nav a:hover {
             color: #FF8C42;
         }
+
         @media (max-width: 600px) {
             .division-button {
                 width: 150px;
@@ -134,18 +142,16 @@ $nama = $user ? $user['nama'] : 'Manajer';
     </style>
 </head>
 <body>
-    <header class="top-bar">
-        <div class="logo"> 
-            <img src="logo.png" alt="BacterFly Logo">
-            <span>Welcome To <strong>BacterFly</strong></span>
-        </div>
+    <header>
+        <img src="logo.png" alt="BacterFly Logo" class="logo-img">
+        <h1><span class="logo">Welcome to BacterFly</span></h1>
     </header>
 
     <div class="division-buttons">
-        <a href="pilih_div.php?division=Produksi" class="division-button">
+        <a href="laporan_bakteri.php?division=Produksi" class="division-button">
             <img src="images/box.png" alt="Produksi Icon"> Produksi
         </a>
-        <a href="pilih_div.php?division=Laboratorium" class="division-button">
+        <a href="Pihome.php?division=Laboratorium" class="division-button">
             <img src="images/microscope.png" alt="Inokulasi Icon"> Inokulasi
         </a>
     </div>
@@ -159,7 +165,7 @@ $nama = $user ? $user['nama'] : 'Manajer';
             <img src="images/timer.png" alt="Timer">
             <span>Pengawasan</span>
         </a>
-        <a href="list_manajer.php">
+        <a href="#">
             <img src="images/list.png" alt="List">
             <span>List</span>
         </a>

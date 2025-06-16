@@ -6,7 +6,7 @@ if (!$pdo) {
     die("Koneksi gagal: Periksa pesan sebelumnya di log atau konfigurasi.");
 }
 
-// Ambil data dari tabel datainokulasi dengan kategori 'Pertanian' dan pengurutan berdasarkan inokulasi_id
+// Ambil data dari tabel datainokulasi dengan kategori 'Peternakan' dan pengurutan berdasarkan inokulasi_id
 $query = "SELECT inokulasi_id, Laboratorium_id, Manager_id, kategori, nama_bakteri, media, metode_inokulasi, tanggal_inokulasi, status_kualitas, jumlah_bakteri, tanggal_keluar, inokulasi_berhasil FROM datainokulasi WHERE kategori = 'Pertanian' ORDER BY inokulasi_id DESC";
 $stmt = $pdo->prepare($query);
 
@@ -36,45 +36,27 @@ try {
             height: 100vh;
             justify-content: space-between;
         }
-        .top-bar {
-            padding: 10px;
-            background-color: #000;
-            border-bottom: 1px solid #333;
+        header {
+            text-align: center;
+            padding: 1rem;
+            background: #000;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            gap: 10px;
+        }
+        .logo-img {
+            height: 30px;
+            vertical-align: middle;
         }
         .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #FF8C42;
-            font-size: 14px;
-        }
-        .logo img {
-            height: 30px;
-            margin-right: 10px;
-        }
-        .nav-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 0 10px;
-        }
-        .nav-bar .back {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            color: white;
-            font-size: 16px;
-            text-decoration: none;
-        }
-        .nav-bar .title {
-            font-weight: bold;
-            text-align: center;
-            flex-grow: 1;
+            color: #FFA500;
+            font-size: 24px;
             margin: 0;
+        }
+        .welcome-text {
+            font-size: 14px;
+            color: #FF8C42;
         }
         .report-section {
             flex-grow: 1;
@@ -123,13 +105,14 @@ try {
             font-size: 14px;
         }
         .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            background: #000;
-            padding: 10px 0;
             position: fixed;
             bottom: 0;
             width: 100%;
+            background: linear-gradient(90deg, #222, #444);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            height: 60px; /* Tinggi tetap untuk bottom-nav */
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
             border-top: 1px solid #555;
         }
@@ -180,15 +163,9 @@ try {
     </style>
 </head>
 <body>
-    <header class="top-bar">
-        <div class="logo"> 
-            <img src="logo.png" alt="BacterFly Logo">
-            <span>Welcome To <strong>BacterFly</strong></span>
-        </div>
-        <div class="nav-bar">
-            <a href="javascript:history.back()" class="back">< Back</a>
-            <span class="title">Inokulasi Pertanian</span>
-        </div>
+    <header>
+        <img src="logo.png" alt="BacterFly Logo" class="logo-img">
+        <h1><span class="logo">Welcome to BacterFly</span></h1>
     </header>
 
     <div class="report-section">
@@ -225,7 +202,7 @@ try {
             <img src="images/timer.png" alt="Pengawasan">
             <span>Pengawasan</span>
         </a>
-        <a href="list_manajer.php">
+        <a href="#">
             <img src="images/list.png" alt="List">
             <span>List</span>
         </a>

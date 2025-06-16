@@ -35,7 +35,7 @@ try {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Manajer - BacterFly</title>
+    <title>Dashboard - BacterFly</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -174,21 +174,21 @@ try {
         </main>
 
         <div class="bottom-nav">
-            <a href="manajer.php" class="active">
-                <img src="images/home.png" alt="Home">
+            <a href="lab_dashboard.php" class="active">
+                <span>🏠</span>
                 <span>Home</span>
             </a>
-            <a href="pengawasan.php">
-                <img src="images/clock.png" alt="Pengawasan">
-                <span>Pengawasan</span>
+            <a href="lab_bakteri.php">
+                <span>🕒</span>
+                <span>Data</span>
             </a>
-            <a href="list_manajer.php">
-                <img src="images/list.png" alt="List">
-                <span>List</span>
+            <a href="lab_intruksi.php">
+                <span>📋</span>
+                <span>Instruksi</span>
             </a>
-            <a href="profil.php">
-                <img src="images/profile.png" alt="Profile">
-                <span>Profile</span>
+            <a href="profil_manajer.php">
+                <span>👤</span>
+                <span>Profil</span>
             </a>
         </div>
     </div>

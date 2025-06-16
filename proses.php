@@ -18,7 +18,7 @@ if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] === 'mark_do
 
     // Validate ID
     if (!is_numeric($id) || $id <= 0) {
-        header("Location: Piinstruksi.php?error=" . urlencode("Invalid instruction ID."));
+        header("Location: manajer.php?error=" . urlencode("Invalid instruction ID."));
         exit();
     }
 
@@ -29,17 +29,17 @@ if (isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] === 'mark_do
         $stmt->execute([$id]);
 
         // Redirect back to the instructions page after success
-        header("Location: Piinstruksi.php");
+        header("Location: manajer.php");
         exit();
     } catch (PDOException $e) {
         // Log error and redirect with error message
         error_log("Error updating status: " . $e->getMessage());
-        header("Location: Piinstruksi.php?error=" . urlencode("Error updating status."));
+        header("Location: manajer.php?error=" . urlencode("Error updating status."));
         exit();
     }
 }
 
 // If no valid action, redirect to the instructions page
-header("Location: Piinstruksi.php");
+header("Location: manajer.php");
 exit();
 ?>

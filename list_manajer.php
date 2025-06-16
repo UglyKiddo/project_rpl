@@ -74,10 +74,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         .instruction-status {
             margin-left: 10px;
-            /* Removed color and font-style to inherit default */
         }
         .instruction-status.done {
-            /* Removed color and text-decoration to inherit default */
+            /* Tidak ada perubahan warna atau garis coret */
         }
         .actions a {
             color: #fff;
@@ -216,6 +215,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </span>
                     </p>
                     <div class="actions">
+                        <a href="detail.php?id=<?php echo $row['id']; ?>" class="detail">Lihat Detail</a>
                         <a href="proses.php?action=delete&id=<?php echo $row['id']; ?>" class="delete">Delete</a>
                     </div>
                 </div>
@@ -247,7 +247,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Tombol Tambah Instruksi -->
         <div class="add-button">
-            <a href="#" onclick="document.getElementById('addForm').style.display = 'block'; this.style.display = 'none';">+</a>
+            <a href="tambah_intruksi.php" onclick="document.getElementById('addForm').style.display = 'block'; this.style.display = 'none';">+</a>
         </div>
     </div>
 

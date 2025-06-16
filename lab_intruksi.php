@@ -147,10 +147,10 @@ $isLatestDone = $latest_row && strtolower($latest_row['status']) === 'done'; // 
 </main>
 
 <nav>
-  <a href="Pidashboard.php">🏠</a>
-  <a href="Pihome.php">🕒</a>
-  <a href="Piinstruksi.php" class="active">📋</a>
-  <a href="Piprofile.php">👤</a>
+  <a href="lab_dashboard.php">🏠</a>
+  <a href="lab_bakteri.php">🕒</a>
+  <a href="lab_intruksi.php" class="active">📋</a>
+  <a href="profil.php">👤</a>
 </nav>
 
 </body>

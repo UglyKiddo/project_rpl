@@ -27,22 +27,26 @@ if (isset($_POST['login'])) {
         $_SESSION['user_email'] = $email;
         $_SESSION['logged_in'] = true;
         $_SESSION['id'] = $user['id']; // Add user ID to session
-        $_SESSION['division'] = $user['division']; // Ambil divisi dari database
+        $_SESSION['division'] = $user['division'] ?? '-'; // Ambil divisi dari database
 
-        $pesan = "Login berhasil! Selamat datang.";
+        // Debugging: Tampilkan divisi untuk verifikasi
+        error_log("Divisi user: " . $user['division']);
+
         // Redirect ke halaman sesuai divisi
-        switch ($user['division']) {
-            case 'Laboratorium':
-                header("Location: Pidashboard.php");
+        $division = strtolower(trim($user['division']));
+        switch ($division) {
+            case 'laboratorium':
+                header("Location: lab_dashboard.php");
                 break;
-            case 'Produksi':
+            case 'produksi':
                 header("Location: pilih_bidang.php");
                 break;
-            case 'Manager':
+            case 'manajer':
                 header("Location: manajer.php");
                 break;
             default:
                 header("Location: home.php"); // Jika divisi tidak terdefinisi
+                error_log("Divisi tidak dikenali: " . $division);
         }
         exit();
     } else {

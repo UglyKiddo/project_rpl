@@ -1,41 +1,53 @@
 <?php
-require 'koneksi.php'; // koneksi ke database menggunakan PDO
+ini_set('session.gc_maxlifetime', 3600);
+session_set_cookie_params(3600);
+session_start(); // Mulai sesi
 
-// Pengecekan koneksi
-if (!$pdo) {
-    die("Koneksi Gagal: Periksa pesan sebelumnya di log.");
+require 'koneksi.php'; // Koneksi database menggunakan PDO
+
+// Debug sesi
+error_log("User ID di sesi: " . ($_SESSION['id'] ?? 'tidak ada'));
+
+// Periksa apakah pengguna sudah login
+if (!isset($_SESSION['id'])) {
+    error_log("Sesi id tidak ditemukan di profile.php");
+    header("Location: login.php?error=session_expired");
+    exit;
 }
 
-// Contoh pengambilan data user dengan prepared statement
-$id_user = 1; // Ganti dengan ID user yang diinginkan untuk tes
-$query = "SELECT nama, division FROM users WHERE id = :id"; // Sesuaikan nama kolom jika berbeda
+// Periksa koneksi database
+if (!$pdo) {
+    error_log("Koneksi PDO gagal di profile.php");
+    die("Koneksi gagal: Periksa konfigurasi database.");
+}
+
+// Ambil data pengguna
+$user_id = $_SESSION['id'];
+$query = "SELECT nama, division FROM users WHERE id = :id";
 $stmt = $pdo->prepare($query);
 
 try {
-    $stmt->execute(['id' => $id_user]);
+    $stmt->execute(['id' => $user_id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($row) {
-        $nama = $row['nama'] ?? 'Belum Diisi';
-        $divisi = $row['division'] ?? '-';
-        $role = '-'; // Kolom role tidak ada, diatur manual
-    } else {
-        $nama = 'Belum Diisi';
-        $divisi = '-';
-        $role = '-';
+    if (!$row) {
+        error_log("Pengguna dengan ID $user_id tidak ditemukan di database");
+        header("Location: login.php?error=user_not_found");
+        exit;
     }
+    $nama = $row['nama'] ?: 'Tidak Ditemukan';
+    $division = $row['division'] ?: 'Tidak Diketahui';
 } catch (PDOException $e) {
+    error_log("Error query: " . $e->getMessage());
     $nama = 'Error';
-    $divisi = '-';
-    $role = 'Error: ' . $e->getMessage();
+    $division = 'Error: ' . $e->getMessage();
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Profile Manajer</title>
+    <title>Profil - <?= htmlspecialchars($division) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -155,25 +167,6 @@ try {
             color: #FF8C42;
         }
 
-        .logout-button {
-            display: block;
-            width: 80%;
-            max-width: 300px;
-            margin: 10px auto;
-            padding: 10px;
-            background-color: #FF4500;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .logout-button:hover {
-            background-color: #CC3700;
-        }
-
         @media (max-width: 600px) {
             .bottom-nav img {
                 width: 20px;
@@ -186,10 +179,6 @@ try {
                 width: 90%;
                 max-width: 250px;
             }
-            .logout-button {
-                width: 90%;
-                max-width: 250px;
-            }
         }
     </style>
 </head>
@@ -197,45 +186,45 @@ try {
 
     <header class="top-bar">
         <div class="logo"> 
-            <img src="logo.png" alt="BacterFly Logo">
-            <span>Welcome To <strong>BacterFly</strong></span>
+            <img src="logo.png" alt="Logo BacterFly">
+            <span>Selamat Datang di <strong>BacterFly</strong></span>
         </div>
         <div class="nav-bar">
-            <a href="javascript:history.back()" class="back">< Back</a>
-            <span class="title">Profile</span>
-            <a href="edit_profil.php" class="edit">Edit</a>
+            <a href="javascript:history.back()" class="back">< Kembali</a>
+            <span class="title">Profil</span>
+            <a href="edit_profil.php" class="edit">Ubah</a>
         </div>
     </header>
 
     <main class="profile-container">
         <div class="avatar">
-            <img src="images/profile-icon.png" alt="Profile Picture">
+            <img src="images/profile-icon.png" alt="Foto Profil">
         </div>
         <h2 class="username"><?= htmlspecialchars($nama) ?></h2>
 
         <div class="user-info">
-            <p>Divisi : <?= $divisi !== '' ? htmlspecialchars($divisi) : '-' ?></p>
+            <p>Divisi: <?= htmlspecialchars($division) ?></p>
         </div>
     </main>
+
     <div class="bottom-nav">
         <a href="manajer.php">
-            <img src="images/home.png" alt="Home">
-            <span>Home</span>
+            <img src="images/home.png" alt="Beranda">
+            <span>Beranda</span>
         </a>
         <a href="pengawasan.php">
-            <img src="images/timer.png" alt="Timer">
+            <img src="images/clock.png" alt="Pengawasan">
             <span>Pengawasan</span>
         </a>
         <a href="list_manajer.php">
-            <img src="images/list.png" alt="List">
-            <span>List</span>
+            <img src="images/list.png" alt="Daftar">
+            <span>Daftar</span>
         </a>
         <a href="profil_manajer.php" class="active">
-            <img src="images/profile.png" alt="Profile">
-            <span>Profile</span>
+            <img src="images/profile.png" alt="Profil">
+            <span>Profil</span>
         </a>
     </div>
-    <a href="logout.php" class="logout-button">Logout</a>
 
 </body>
 </html>
